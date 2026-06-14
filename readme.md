@@ -49,6 +49,7 @@ Open index.html in your browser.
 ```
  https://bluehope-dream.github.io/Calculator-Website/
  ```
+![Demo Website](demo.png)
 
 ## Author 
 ```
