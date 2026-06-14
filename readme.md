@@ -19,8 +19,8 @@ This project is a simple calulator with basic operation including :
 
 ## Directory Structure 
 
+```text
 calculator-website/
-|
 |
 |__ index.html
 |
@@ -32,6 +32,7 @@ calculator-website/
 |
 |
 |__ readme.md
+```
 
 ## Installation
 
