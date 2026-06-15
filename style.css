@@ -1,98 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", sans-serif;
 }
 
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background: linear-gradient(to right, #00AAFF, #00FF6C);
+    gap: 24px;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+
+    /* Nền động chuyển màu siêu mượt */
+    background: linear-gradient(-45deg, #f8fafc, #eef2ff, #e2e8f0, #e0f2fe);
+    background-size: 400% 400% !important;
+    animation: gradientBG 15s ease infinite;
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================
+   CALCULATOR CONTAINER
+========================== */
 .calculator-grid {
     display: grid;
-
-    grid-template-columns: repeat(4, 90px);
-    grid-template-rows: minmax(140px, auto) repeat(5, 90px);
-
-    gap: 10px;
-
-    padding: 20px;
-
-    background: rgba(255,255,255,0.1);
-
-    backdrop-filter: blur(20px);
-
-    border-radius: 25px;
-
+    grid-template-columns: repeat(4, 85px);
+    grid-template-rows: minmax(120px, auto);
+    grid-auto-rows: 75px; /* Tự động sinh hàng với chiều cao tiêu chuẩn */
+    gap: 12px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e5e7eb;
+    border-radius: 28px;
     box-shadow:
-        0 20px 40px rgba(0,0,0,.3);
+        0 10px 30px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.04);
+    animation: fadeIn 0.4s ease forwards;
 }
 
-.calculator-grid > button{
-
-    cursor: pointer; 
-    font-size:  2rem;
-    border : 1px solid white;
-    outline: none;
-    background-color:rgba(255,255,255,.75) ;
-
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.calculator-grid > button :hover{
-    background-color:rgba(255,255,255,.9) ;
-}
-
-.span-two {
-
-    grid-column: span 2;
-
-}
-
-.output{
-
-    grid-column : 1 / -1;
-    background-color: rgba(0,0,0,.75);
-    display :flex;
+/* ==========================
+   DISPLAY
+========================== */
+.output {
+    grid-column: 1 / -1;
+    min-height: 120px;
+    background: linear-gradient(180deg, #111827, #1f2937);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: flex-end;
-    justify-content: space-between;
-    flex-direction:  column;
-    padding: 10px;
+    padding: 18px;
     word-wrap: break-word;
     word-break: break-all;
-
+    text-align: right;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 8px 20px rgba(17,24,39,.25);
 }
- .output .previous-operand {
 
-    color : rgba(255, 255, 255  , .75);
+.previous-operand {
+    color: #94a3b8;
+    font-size: 1rem;
+    min-height: 24px;
+}
 
-    font-size: 1.5 rem; 
- }
-
-.output .current-operand{
-
-    color : white;
-    font-size: 2.5rem;
-
-} 
-
-footer {
-    width: 100%;
-
-    padding: 20px;
-
-    text-align: center;
-
-    background: rgba(0,0,0,.25);
-
+.current-operand {
     color: white;
+    font-size: 2.7rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
 
-    backdrop-filter: blur(10px);
+/* ==========================
+   BUTTONS GENERAL
+========================== */
+.calculator-grid > button {
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.calculator-grid > button:hover { transform: translateY(-2px); }
+.calculator-grid > button:active { transform: scale(0.96); }
+
+/* ==========================
+   BUTTON TYPES
+========================== */
+[data-number] {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(15,23,42,.05);
+}
+[data-number]:hover { background: #f8fafc; }
+
+[data-operation] {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 6px 16px rgba(37,99,235,.25);
+}
+[data-operation]:hover { background: #1d4ed8; }
+
+[data-clear-all] {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 6px 16px rgba(239,68,68,.25);
+}
+[data-clear-all]:hover { background: #dc2626; }
+
+[data-delete] {
+    background: #f59e0b;
+    color: white;
+    box-shadow: 0 6px 16px rgba(245,158,11,.25);
+}
+[data-delete]:hover { background: #d97706; }
+
+
+/* ==========================
+   TỰ ĐỘNG THU NHỎ CÁC PHÍM PHỤ (Dựa theo thứ tự trong HTML cũ)
+   Nhận diện các nút khoa học từ vị trí dấu "!" trở đi
+========================== */
+.calculator-grid > button:nth-of-type(18), /* Nút ! */
+.calculator-grid > button:nth-of-type(19), /* Nút % */
+.calculator-grid > button:nth-of-type(20), /* Nút x² */
+.calculator-grid > button:nth-of-type(21), /* Nút √ */
+.calculator-grid > button:nth-of-type(22), /* Nút xʸ */
+.calculator-grid > button:nth-of-type(23), /* Nút log */
+.calculator-grid > button:nth-of-type(24), /* Nút PrAns */
+.calculator-grid > button:nth-of-type(25)  /* Nút Ans */ {
+    background: #f1f5f9; 
+    color: #475569;      
+    font-size: 0.95rem;   
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    box-shadow: none;     
+}
+
+.calculator-grid > button:nth-of-type(18):hover,
+.calculator-grid > button:nth-of-type(19):hover,
+.calculator-grid > button:nth-of-type(20):hover,
+.calculator-grid > button:nth-of-type(21):hover,
+.calculator-grid > button:nth-of-type(22):hover,
+.calculator-grid > button:nth-of-type(23):hover,
+.calculator-grid > button:nth-of-type(24):hover,
+.calculator-grid > button:nth-of-type(25):hover {
+    background: #e2e8f0;
+}
+
+
+/* ==========================
+   NÚT DẤU BẰNG TO VỪA PHẢI
+========================== */
+[data-equal] {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    font-size: 1.4rem; 
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(37,99,235,.30);
+}
+[data-equal]:hover {
+    box-shadow: 0 12px 28px rgba(37,99,235,.40);
+}
+
+/* Giữ nguyên độ rộng gấp đôi cho AC và dấu = */
+.span-two {
+    grid-column: span 2;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #64748b; 
+    letter-spacing: 0.03em;
+    animation: popIn 0.6s 0.4s ease both;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }

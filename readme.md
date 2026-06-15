@@ -11,6 +11,13 @@ This project is a simple calulator with basic operation including :
 - Division (/)
 - Delete (DEL)
 - All clear (AC)
+- Ans, PreAns
+- Percentage (%)
+- Log10 (log)
+- Square (x^2)
+- Pow (x^y)
+- Sqrt 
+- Factorial (!)
 ```
 
 ## Technology Used 
@@ -46,10 +53,19 @@ git clone  https://github.com/Bluehope-dream/Calculator-Website.git
 Open index.html in your browser.
 
 ## Live Demo
+Demmo Version 1 
 ```
  https://bluehope-dream.github.io/Calculator-Website/
  ```
 ![Demo Website](demo.png)
+
+Demmo Version 2 
+```
+
+```
+![Demo Website](demo2.png)
+## Update Version
+15/6/2026 : Update log, pow, !, %, sqrt, Ans, PreAns
 
 ## Author 
 ```
