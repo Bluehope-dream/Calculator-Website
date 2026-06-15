@@ -53,17 +53,17 @@ git clone  https://github.com/Bluehope-dream/Calculator-Website.git
 Open index.html in your browser.
 
 ## Live Demo
-Demmo Version 1 
 ```
  https://bluehope-dream.github.io/Calculator-Website/
  ```
+Demo Version 1 
+
 ![Demo Website](demo.png)
 
-Demmo Version 2 
-```
+Demo Version 2 
 
-```
 ![Demo Website](demo2.png)
+
 ## Update Version
 15/6/2026 : Update log, pow, !, %, sqrt, Ans, PreAns
 
